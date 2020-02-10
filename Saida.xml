@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<conexao>
+  <localsgbd>localhost</localsgbd>
+  <driver>org.postgresql.Driver</driver>
+  <usuarioBD>postgres</usuarioBD>
+  <senhaBD>testeabc</senhaBD>
+  <drive>jdbc:postgresql:</drive>
+  <nomebd>aewinformatica</nomebd>
+  <contato>aewinformatica@gmail.com</contato>
+</conexao>
