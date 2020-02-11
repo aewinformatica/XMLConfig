@@ -17,7 +17,7 @@ public class ConfigProjeto extends  Conexao{
     
 
     public ConfigProjeto() {
-//        testeConnection = getConexao();
+
     }
     
     /**
