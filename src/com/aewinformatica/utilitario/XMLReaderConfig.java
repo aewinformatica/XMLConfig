@@ -116,9 +116,9 @@ private void trataElemento(Element el){
     }
 
   public static void main(String[] args){
-//        XMLReaderConfig xr = new XMLReaderConfig();
-//        
-//        xr.trataXML( Utils.raiz+ "config.xml");
+        XMLReaderConfig xr = new XMLReaderConfig();
+        
+        xr.trataXML( Utils.raiz+ "config.xml");
     }
 
     /**
