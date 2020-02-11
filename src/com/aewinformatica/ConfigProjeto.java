@@ -5,8 +5,10 @@
  */
 package com.aewinformatica;
 
+import com.aewinformatica.utilitario.Conexao;
 import com.aewinformatica.utilitario.Utils;
 import com.aewinformatica.utilitario.XMLReaderConfig;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -14,41 +16,57 @@ import javax.swing.UIManager;
  *
  * @author Jessica
  */
-public class ConfigProjeto {
+public class ConfigProjeto extends  Conexao{
     
-    private static String driver = "";
+    
+    private static String driver;
 
+    public ConfigProjeto() {
+//        testeConnection = getConexao();
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        /*XMLReaderConfig xr = new XMLReaderConfig();
-                        xr.trataXML( Utils.raiz+ "config.xml");
-        */
+        ConfigProjeto conf = new ConfigProjeto();
         
-         UIManager.put("OptionPane.yesButtonText", "Criar Banco-de-dados (Postgres)");
-         UIManager.put("OptionPane.noButtonText", "Criar Banco-de-dados (MySQL)");
-         
+         UIManager.put("OptionPane.yesButtonText", "Conectar com Banco-de-dados (Postgres)");
+         UIManager.put("OptionPane.noButtonText", "Conectar  com Banco-de-dados (MySQL)");
          UIManager.put("OptionPane.CancelButtonText", "Desistir");
-         int escolha = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Criar o Banco-de-dados agora?", "Criação do banco-de-dados", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+         
+         int escolha = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja Conectar com o Banco-de-dados agora?", "Conectar com o banco-de-dados", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
          
         switch (escolha) {
             case JOptionPane.YES_OPTION:
                 driver = "org.postgresql.Driver";
-                Utils.criarBancoDeDados(driver);
+                conf.setDriver(driver);
                 break;
             case JOptionPane.NO_OPTION:
                 driver = "com.mysql.cj.jdbc.Driver";
-                Utils.criarBancoDeDados(driver);
+                conf.setDriver(driver);
                 break;
             default:
-                JOptionPane.showMessageDialog(null, "Você escolheu Desistir e o Banco-de-dados não foi criado!"
-                        + "\nVocê pode criar o banco-de-dados manualmente através do gerenciador de banco-de-dados.");
+                JOptionPane.showMessageDialog(null, "Você escolheu Desistir de Conectar com o Banco-de-dados!");
                 System.exit(0);
         }
+                      
+            conf.conectar();
+            conf.criarBancoDeDadosUI();
+            
+        /*XMLReaderConfig xr = new XMLReaderConfig();
+                        xr.trataXML( Utils.raiz+ "config.xml");
+        */
+        
+        
+//        criarBancoDados();
         
 
-    }
+}
+        
+
+    
+
     
 }
