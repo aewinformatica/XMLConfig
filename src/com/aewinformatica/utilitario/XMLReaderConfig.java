@@ -70,7 +70,7 @@ private void trataElemento(Element el){
                 
                 
                 
-                System.out.println("Elemento: "+el1.getQualifiedName().trim()+" - Valor: "+el1.getText());
+//                System.out.println("Elemento: "+el1.getQualifiedName().trim()+" - Valor: "+el1.getText());
                
                 if (campo.equalsIgnoreCase(("localsgbd"))){
                     setY_localsgbd(el1.getText());
@@ -100,7 +100,7 @@ private void trataElemento(Element el){
             }
         } else {
         }
-        JOptionPane.showMessageDialog(null,"Metodo XMLReaderConfig().trataElemento() \nLocal SGBD: "+getY_localsgbd()+"\nDriver: "+getY_driver()+"\nURL: "+getY_url()+"\nUsuarioBD: "+getY_usuarioBD()+"\nSenhaBD: "+getY_senhaBD()+"\nDriver: "+getY_drive());
+        JOptionPane.showMessageDialog(null,"Metodo XMLReaderConfig().trataElemento() \nLocal SGBD: "+getY_localsgbd()+"\nDriver: "+getY_driver()+"\nUsuarioBD: "+getY_usuarioBD()+"\nSenhaBD: "+getY_senhaBD()+"\nDriver: "+getY_drive());
 }
     private void gravaSaidaTeste(Document doc) {
 		XMLOutputter xmlOutput = new XMLOutputter();
