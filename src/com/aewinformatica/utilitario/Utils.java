@@ -34,7 +34,7 @@ public class Utils {
            try {
                 Class.forName(driver);
                 if (driver.indexOf("postgres") != -1) {
-                    url = url.replaceAll("jdbc:mysql:", "jdbc:postgresql");
+                    url = url.replaceAll("jdbc:mysql:", "jdbc:postgresql:");
                     url = url.replaceAll("aewinformatica", "postgres");
                     usuario = usuario.replaceAll("root", "postgres");
                 } else 
