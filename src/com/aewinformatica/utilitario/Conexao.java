@@ -59,16 +59,14 @@ public class Conexao {
 
              if (driver.contains("postgres")) {
                     url = url.replaceAll("jdbc:mysql:", "jdbc:postgresql:");
-                    url = url.replaceAll("aewinformatica", "postgres");
                     usuario = usuario.replaceAll("root", "postgres");
             }
              else 
                 if (driver.contains("mysql")) {
-                    
-                    url = url.replaceAll("aewinformatica", "mysql");
+                   
                     url  = url + TIMEZONE;
                 }
-            this.setConexao((Connection) DriverManager.getConnection(url, usuario, senha));
+            this.setConexao((Connection) DriverManager.getConnection(url, getUsuario(), senha));
 
             //se ocorrer tudo bem, ou seja, se conectar a linha a segui é executada
             this.status = true;
@@ -78,15 +76,15 @@ public class Conexao {
         return this.getConexao();
     }
     
-        public  void criarBancoDeDados(String driver) {
+        public  void criarBancoDeDados(String pDriver) {
            try {
-                Class.forName(driver);
-                if (driver.contains("postgres")) {
+                Class.forName(pDriver);
+                if (pDriver.contains("postgres")) {
                     url = url.replaceAll("jdbc:mysql:", "jdbc:postgresql:");
                     url = url.replaceAll("aewinformatica", "postgres");
-                    usuario = usuario.replaceAll("root", "postgres");
+                    setUsuario(getUsuario().replaceAll("root", "postgres"));
                 } else 
-                if (driver.contains("mysql")) {
+                if (pDriver.contains("mysql")) {
                     
                     url = url.replaceAll("aewinformatica", "mysql");
                     url  = url + TIMEZONE;
@@ -94,10 +92,10 @@ public class Conexao {
                 
                 JOptionPane.showMessageDialog(null,"Pressione [ OK ] e aguarde alguns instantes para o sistema criar o Banco-de-dados: " + nomeDoBanco +" para você!");
 
-            //createStatement de con para criar o Statement
-            this.setStatement(getConexao().createStatement());
-                 getStatement().executeUpdate("CREATE DATABASE aewinformatica");
-                 this.statement.close();
+                conexao = DriverManager.getConnection(url, usuario, senha);
+                Statement s = conexao.createStatement();
+                s.executeUpdate("CREATE DATABASE aewinformatica");
+                s.close();
                 
                JOptionPane.showMessageDialog(null,"O banco de dados foi criado e o aplicativo será fechado agora!"
                        + "\nEntre novamente para criar as tabelas automaticamente! ");
@@ -142,6 +140,92 @@ public class Conexao {
                 System.exit(0);
         }
     
+    }
+    public int VerificarTabelas(){
+     String sql  = "";
+     int retorno = 0,nTab = 0,passou = 0;
+
+      
+        try {
+            //createStatement de conexao para criar o Statement
+            this.setStatement(getConexao().createStatement());
+            
+            sql = "select * from cfop limit 1";
+            
+                 getStatement().executeQuery(sql);
+               
+                 this.statement.close(); 
+        } catch (SQLException e) {
+            
+//            Verificar CSVs IBGE e CFOP
+            Utils.VerificaCFOPeIBGE();
+
+          
+        }
+        
+        passou++;
+        
+        try {
+            //createStatement de conexao para criar o Statement
+            this.setStatement(getConexao().createStatement());
+            nTab++;
+            
+            sql = "CREATE TABLE cfop ( "
+                  +"codigo integer NOT NULL, "
+                  +"cfop integer, "
+                  +"descricao character varying(120), "
+                  +"observacao character varying(120), "
+                  +"faturamento boolean NOT NULL, "
+                  +"financeiro boolean, "
+                  +"seqcfop integer, "
+                  +"operacao character(1), "
+                  +"CONSTRAINT cfop_pkey PRIMARY KEY (codigo) "
+                  +")";// WITH ( OIDS=FALSE )";
+            System.out.println("SQL: " +sql);
+            
+//           retorno =  getStatement().executeUpdate(sql);
+           executarUpdateDeleteSQL(sql);
+//            System.out.println("Retorno"+ retorno);
+           
+           nTab++;
+           passou++;
+           
+           sql = "CREATE TABLE ibge ( "
+                  +"codigo integer NOT NULL, "
+                  +"cidade character varying(40), "
+                  +"codcidade integer, "
+                  +"distrito character varying(40), "
+                  +"uf character varying(2), "
+                  +"CONSTRAINT ibge_pkey PRIMARY KEY (codigo) "
+                  +")";// WITH ( OIDS=FALSE )";
+           
+           
+//            retorno =  getStatement().executeUpdate(sql);
+                    executarUpdateDeleteSQL(sql);
+           
+           nTab++;
+           passou++;
+           
+        } catch (Exception e) {
+        }
+        
+         return retorno;
+    }
+    
+        public boolean executarUpdateDeleteSQL(String pSQL){
+        try {
+            
+            //createStatement de con para criar o Statement
+            this.setStatement(getConexao().createStatement());
+
+            // Definido o Statement, executamos a query no banco de dados
+            getStatement().executeUpdate(pSQL);
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -198,6 +282,20 @@ public class Conexao {
      */
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public static String getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param aUsuario the usuario to set
+     */
+    public  void setUsuario(String aUsuario) {
+        usuario = aUsuario;
     }
 
 }

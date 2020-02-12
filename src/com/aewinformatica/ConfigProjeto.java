@@ -30,8 +30,10 @@ public class ConfigProjeto extends  Conexao{
         
         ConfigProjeto conf = new ConfigProjeto();
                       conf.setDriver(xr.getY_driver());
+                      conf.setUsuario(xr.getY_usuarioBD());
+//                      conf.criarBancoDeDadosUI();
                       conf.conectar();
-                      conf.criarBancoDeDadosUI();
+                      conf.VerificarTabelas();
             
 }
         

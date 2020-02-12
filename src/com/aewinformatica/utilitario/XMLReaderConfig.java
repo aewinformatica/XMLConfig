@@ -58,7 +58,7 @@ private void trataElemento(Element el){
         int tamanho = list.size();
        
 //        System.out.println("Elemento lido: \n "+el.getName()+"\n - tipo: \n"+el.getContent());
-        System.out.println("Tamanho da lista: "+tamanho);
+//        System.out.println("Tamanho da lista: "+tamanho);
         
         
         
@@ -100,7 +100,7 @@ private void trataElemento(Element el){
             }
         } else {
         }
-        JOptionPane.showMessageDialog(null,"Metodo XMLReaderConfig().trataElemento() \nLocal SGBD: "+getY_localsgbd()+"\nDriver: "+getY_driver()+"\nUsuarioBD: "+getY_usuarioBD()+"\nSenhaBD: "+getY_senhaBD()+"\nDriver: "+getY_drive());
+//        JOptionPane.showMessageDialog(null,"Metodo XMLReaderConfig().trataElemento() \nLocal SGBD: "+getY_localsgbd()+"\nDriver: "+getY_driver()+"\nUsuarioBD: "+getY_usuarioBD()+"\nSenhaBD: "+getY_senhaBD()+"\nDriver: "+getY_drive());
 }
     private void gravaSaidaTeste(Document doc) {
 		XMLOutputter xmlOutput = new XMLOutputter();
