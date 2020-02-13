@@ -159,8 +159,6 @@ public class Conexao {
             
 //            Verificar CSVs IBGE e CFOP
             Utils.VerificaCFOPeIBGE();
-
-          
         }
         
         passou++;
@@ -181,11 +179,8 @@ public class Conexao {
                   +"operacao character(1), "
                   +"CONSTRAINT cfop_pkey PRIMARY KEY (codigo) "
                   +")";// WITH ( OIDS=FALSE )";
-            System.out.println("SQL: " +sql);
             
-//           retorno =  getStatement().executeUpdate(sql);
-           executarUpdateDeleteSQL(sql);
-//            System.out.println("Retorno"+ retorno);
+           retorno =  getStatement().executeUpdate(sql);
            
            nTab++;
            passou++;
@@ -199,14 +194,41 @@ public class Conexao {
                   +"CONSTRAINT ibge_pkey PRIMARY KEY (codigo) "
                   +")";// WITH ( OIDS=FALSE )";
            
-           
-//            retorno =  getStatement().executeUpdate(sql);
-                    executarUpdateDeleteSQL(sql);
+            retorno =  getStatement().executeUpdate(sql);
+//                    executarUpdateDeleteSQL(sql);
            
            nTab++;
            passou++;
            
-        } catch (Exception e) {
+           sql = "CREATE TABLE segmento ( "
+                  +"codigo SERIAL NOT NULL, "
+                  +"nome character varying(1024), "
+                  +"codigo_segmento integer, "
+                  +"CONSTRAINT segmento_pkey PRIMARY KEY (codigo) "
+                  +")";//WITH ( OIDS=FALSE )";
+           
+            retorno = getStatement().executeUpdate(sql);
+            
+           nTab++;
+           passou++;
+           
+           sql = "CREATE TABLE item_segmento ( "
+                  +"codigo SERIAL NOT NULL, "
+                  +"item_codigo character varying(1024) , "
+                  +"cest character varying(1024) , "
+                  +"ncm_sh character varying(1024), "
+                  +"descricao character varying(1024),"
+                  +"CONSTRAINT item_segmento_pk PRIMARY KEY (codigo) "
+                  +")";//WITH ( OIDS=FALSE )";
+           
+           retorno = getStatement().executeUpdate(sql);
+           
+            nTab++;
+            passou++;
+           
+                    
+           
+        } catch (SQLException e) {
         }
         
          return retorno;

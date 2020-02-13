@@ -1,0 +1,26 @@
+ITEM;NOME DO SEGMENTO;CÓDIGO DO SEGMENTO
+01;Autopeças;01
+02;Bebidas alcoólicas, exceto cerveja e chope;02
+03;Cervejas, chopes, refrigerantes, águas e outras bebidas;03
+04;Cigarros e outros produtos derivados do fumo;04
+05;Cimentos;05
+06;Combustíveis e lubrificantes;06
+07;Energia elétrica;07
+08;Ferramentas;08
+09;Lâmpadas, reatores e “starter”;09
+10;Materiais de construção e congêneres;10
+11;Materiais de limpeza;11
+12;Materiais elétricos;12
+13;Medicamentos de uso humano e outros produtos farmacêuticos para uso humano ou veterinário;13
+14;Papéis, plásticos, produtos cerâmicos e vidros;14
+15;Pneumáticos, câmaras de ar e protetores de borracha;16
+16;Produtos alimentícios;17
+17;Produtos de papelaria;19
+18;Produtos de perfumaria e de higiene pessoal e cosméticos;20
+19;Produtos eletrônicos, eletroeletrônicos e eletrodomésticos;21
+20;Rações para animais domésticos;22
+21;Sorvetes e preparados para fabricação de sorvetes em máquinas;23
+22;Tintas e vernizes;24
+23;Veículos automotores;25
+24;Veículos de duas e três rodas motorizados;26
+25;Venda de mercadorias pelo sistema porta a porta;28
